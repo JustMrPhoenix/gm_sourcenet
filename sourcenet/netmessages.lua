@@ -874,24 +874,7 @@ NET_MESSAGES = {
 			end
 		},
 
-		[svc_Menu] = { -- 29
-			DefaultCopy = function(netchan, read, write)
-				write:WriteUInt(svc_Menu, NET_MESSAGE_BITS)
-
-				local menutype = read:ReadShort()
-				write:WriteShort(menutype)
-
-				local bytes = read:ReadWord()
-				write:WriteWord(bytes)
-
-				if bytes > 0 then
-					local data = read:ReadBytes(bytes)
-					write:WriteBytes(data, bytes)
-				end
-
-				SourceNetMsg(string.format("svc_Menu menutype=%i,bytes=%i\n", menutype, bytes))
-			end
-		},
+		-- svc_Menu (29) removed: no longer exists in the GMod engine.
 
 		[svc_GameEventList] = { -- 30
 			DefaultCopy = function(netchan, read, write)
@@ -1087,7 +1070,6 @@ AddNetMessage(NET_MESSAGES.SVC, svc_GameEvent)
 AddNetMessage(NET_MESSAGES.SVC, svc_PacketEntities)
 AddNetMessage(NET_MESSAGES.SVC, svc_TempEntities)
 AddNetMessage(NET_MESSAGES.SVC, svc_Prefetch)
-AddNetMessage(NET_MESSAGES.SVC, svc_Menu)
 AddNetMessage(NET_MESSAGES.SVC, svc_GameEventList)
 AddNetMessage(NET_MESSAGES.SVC, svc_GetCvarValue)
 AddNetMessage(NET_MESSAGES.SVC, svc_CmdKeyValues)
